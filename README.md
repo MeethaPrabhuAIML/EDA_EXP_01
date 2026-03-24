@@ -33,3 +33,68 @@ Count matches per venue. Display top 5 venues with a horizontal bar chart.
 7.Draw Insights
 
 Observe patterns in toss decisions. Identify teams with consistent winning trends.
+
+## Program
+```
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+matches = pd.read_csv("/content/matches.csv")
+print("Dataset Shape:", matches.shape)
+print(matches.head())
+
+season_counts = matches['season'].value_counts().sort_index()
+
+plt.figure(figsize=(8,4))
+sns.barplot(x=season_counts.index, y=season_counts.values, palette="viridis")
+plt.title("Number of Matches per Season")
+plt.xlabel("Season")
+plt.ylabel("Matches")
+plt.show()
+
+team_wins = matches['winner'].value_counts()
+
+print("\nTop Winning Teams:\n", team_wins.head(5))
+
+plt.figure(figsize=(8,4))
+sns.barplot(x=team_wins.head(5).index, y=team_wins.head(5).values, palette="magma")
+plt.title("Top 5 Winning Teams")
+plt.xlabel("Team")
+plt.ylabel("Wins")
+plt.show()
+
+toss_decision = matches['toss_decision'].value_counts()
+
+print("\nToss Decisions:\n", toss_decision)
+
+plt.figure(figsize=(6,4))
+sns.barplot(x=toss_decision.index, y=toss_decision.values, palette="Set2")
+plt.title("Toss Decisions (Bat or Field)")
+plt.show()
+
+venue_counts = matches['venue'].value_counts().head(5)
+
+print("\nTop Venues:\n", venue_counts)
+
+plt.figure(figsize=(8,4))
+sns.barplot(y=venue_counts.index, x=venue_counts.values, palette="coolwarm")
+plt.title("Top 5 Venues by Matches Hosted")
+plt.xlabel("Matches Hosted")
+plt.ylabel("Venue")
+plt.show()
+```
+
+## Output
+<img width="973" height="476" alt="image" src="https://github.com/user-attachments/assets/5b576d1d-be90-436d-84ff-d14397b93c73" />
+
+<img width="706" height="479" alt="image" src="https://github.com/user-attachments/assets/07c2449f-88e3-44a2-9745-9d6f69c8c2d9" />
+
+<img width="1414" height="504" alt="image" src="https://github.com/user-attachments/assets/fbf52479-4610-4fbc-8a9a-c1fc5f6ca071" />
+
+## Result
+
+This experiment is executed successfully
+
+
+
